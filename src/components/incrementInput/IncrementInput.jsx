@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Proptypes from 'prop-types';
-import ButtonGroup from '@material-ui/core/ButtonGroup'
+import ButtonGroup from '@material-ui/core/ButtonGroup';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl'
+import FormControl from '@material-ui/core/FormControl';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
-import RemoveIcon from '@material-ui/icons/Remove'
+import RemoveIcon from '@material-ui/icons/Remove';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
@@ -15,8 +15,8 @@ const useStyles = makeStyles({
 
   },
   inputAdornedEnd: {
-    paddingRight: 0
-  }
+    paddingRight: 0,
+  },
 });
 
 const IncrementInput = ({ initialValue, onChangeHandler, label }) => {
@@ -26,7 +26,7 @@ const IncrementInput = ({ initialValue, onChangeHandler, label }) => {
 
   const decrement = () => setValue(value - 1);
 
-  let classes = useStyles();
+  const classes = useStyles();
 
   useEffect(() => {
     if (value) {
@@ -45,29 +45,32 @@ const IncrementInput = ({ initialValue, onChangeHandler, label }) => {
           { adornedEnd: classes.inputAdornedEnd }
         }
         endAdornment={
-        <InputAdornment>
-          <ButtonGroup
-            orientation="vertical"
-            variant="outlined"
-            size="small"
-          >
-            <IconButton onClick={increment}><AddIcon /></IconButton>
-            <IconButton onClick={decrement}><RemoveIcon /></IconButton>
-          </ButtonGroup>
-        </InputAdornment>
-      }/>
+          (
+            <InputAdornment>
+              <ButtonGroup
+                orientation="vertical"
+                variant="outlined"
+                size="small"
+              >
+                <IconButton onClick={increment}><AddIcon /></IconButton>
+                <IconButton onClick={decrement}><RemoveIcon /></IconButton>
+              </ButtonGroup>
+            </InputAdornment>
+          )
+        }
+      />
     </FormControl>
-  )
-}
+  );
+};
 
 IncrementInput.propTypes = {
   initialValue: Proptypes.number,
   onChangeHandler: Proptypes.func.isRequired,
   label: Proptypes.string.isRequired,
-}
+};
 
 IncrementInput.defaultProps = {
   initialValue: 0,
-}
+};
 
 export default IncrementInput;

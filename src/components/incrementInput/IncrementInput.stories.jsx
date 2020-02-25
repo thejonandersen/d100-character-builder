@@ -9,7 +9,7 @@ export default {
 
 export const Basic = () => (
   <IncrementInput
-    onChangeHandler={action(`clicked, value:`)}
+    onChangeHandler={action('clicked, value:')}
     label="Storybook Label"
   />
-  );
+);
