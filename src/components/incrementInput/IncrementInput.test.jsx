@@ -24,6 +24,7 @@ describe('IncrementInput', () => {
       <IncrementInput
         onChangeHandler={handler}
         label={labelText}
+        disableDecrement={false}
       />,
     );
     const buttons = getAllByRole('button');

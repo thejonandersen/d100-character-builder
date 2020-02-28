@@ -11,8 +11,6 @@ import * as serviceWorker from './serviceWorker';
 
 import './index.css';
 
-console.log({ initialStore });
-
 const store = init(initialStore);
 
 const Root = () => (
