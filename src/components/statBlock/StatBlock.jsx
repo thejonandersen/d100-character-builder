@@ -1,9 +1,18 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
 
 import IncrementInput from '../incrementInput/IncrementInput';
 import InfoBlock from '../infoBlock/InfoBlock';
+import calculateTotal from '../../utils/calculateTotals';
+
+const useStyles = makeStyles({
+  paper: {
+    padding: 5,
+  },
+});
 
 const StatBlock = ({
   scores: initialScores,
@@ -16,6 +25,7 @@ const StatBlock = ({
   const [disableDecrement, setDisableDecrement] = useState(true);
 
   const scoreKeys = Object.keys(scores);
+  const classes = useStyles();
 
   const updateScore = (key, value) => {
     const {
@@ -46,27 +56,27 @@ const StatBlock = ({
   };
 
   return (
-    <Grid container spacing={2}>
-      {scoreKeys.map((key) => {
-        const {
-          base, raceBonus, itemBonus, advantageBonus,
-        } = scores[key];
-        return (
-          <Grid item key={key} xs={12} md={1}>
-            <IncrementInput
-              label={key}
-              initialValue={base + raceBonus + itemBonus + advantageBonus}
-              onChangeHandler={(value) => updateScore(key, value)}
-              disableIncrement={disableIncrement}
-              disableDecrement={disableDecrement}
-            />
-          </Grid>
-        );
-      })}
-      <Grid item xs={12} md={1}>
-        <InfoBlock value={points} label="remaining" />
+    <Paper classes={{ root: classes.paper }}>
+      <Grid container direction="row" spacing={1}>
+        {scoreKeys.map((key) => {
+          const statScores = scores[key];
+          return (
+            <Grid item key={key} xs>
+              <IncrementInput
+                label={key}
+                initialValue={calculateTotal(statScores)}
+                onChangeHandler={(value) => updateScore(key, value)}
+                disableIncrement={disableIncrement}
+                disableDecrement={disableDecrement}
+              />
+            </Grid>
+          );
+        })}
+        <Grid item xs>
+          <InfoBlock value={points} label="remaining" />
+        </Grid>
       </Grid>
-    </Grid>
+    </Paper>
   );
 };
 

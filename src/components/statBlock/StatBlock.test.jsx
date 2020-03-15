@@ -14,7 +14,7 @@ describe('StatBlock', () => {
       ...stats,
       onUpdate,
     };
-  })
+  });
 
   it('should update remaining on increment', () => {
     const { getAllByRole, getByLabelText } = render(<StatBlock {...props} />);
@@ -23,9 +23,9 @@ describe('StatBlock', () => {
 
     fireEvent.click(buttons[0]);
 
-    expect(onUpdate).toHaveBeenCalledWith({"key": "str", "newBase": 4}); 
-    expect(remaining).toHaveValue('72');   
-  })
+    expect(onUpdate).toHaveBeenCalledWith({ key: 'str', newBase: 4 });
+    expect(remaining).toHaveValue('72');
+  });
 
   it('should update remaining on decrement', () => {
     const { getAllByRole, getByLabelText } = render(<StatBlock {...props} />);
@@ -34,16 +34,16 @@ describe('StatBlock', () => {
 
     // button should initially be disabled
     fireEvent.click(buttons[1]);
-    expect(onUpdate).not.toHaveBeenCalled(); 
-    expect(remaining).toHaveValue('73'); 
+    expect(onUpdate).not.toHaveBeenCalled();
+    expect(remaining).toHaveValue('73');
 
     // after increment, decrement can happen
     fireEvent.click(buttons[0]);
     fireEvent.click(buttons[1]);
 
-    expect(onUpdate).toHaveBeenLastCalledWith({"key": "str", "newBase": 3});
-    expect(remaining).toHaveValue('73');    
-  })
+    expect(onUpdate).toHaveBeenLastCalledWith({ key: 'str', newBase: 3 });
+    expect(remaining).toHaveValue('73');
+  });
 
   it('should not update remaining on increment beyond 0', () => {
     props.points = 1;
@@ -55,7 +55,7 @@ describe('StatBlock', () => {
     fireEvent.click(buttons[0]);
     fireEvent.click(buttons[0]);
 
-    expect(onUpdate).toHaveBeenCalledTimes(1); 
-    expect(remaining).toHaveValue('0');   
-  })
+    expect(onUpdate).toHaveBeenCalledTimes(1);
+    expect(remaining).toHaveValue('0');
+  });
 });

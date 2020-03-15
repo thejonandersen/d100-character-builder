@@ -3,8 +3,9 @@
     "javascript": "javascriptreact"
   },
   "emmet.syntaxProfiles": {
-    "javascript": "jsx"
+    "javascript": "jsx",
   },
+  "emmet.triggerExpansionOnTab": true,
   "editor.formatOnSave": true,
   "files.insertFinalNewline": true,
   "editor.codeActionsOnSave": {
@@ -12,5 +13,10 @@
   },
   "eslint.alwaysShowStatus": true,
   "eslint.format.enable": true,
-  "eslint.lintTask.enable": true
+  "eslint.lintTask.enable": true,
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": false,
+    "strings": false
+  },
 }

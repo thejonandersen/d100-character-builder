@@ -3,6 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { init } from '@rematch/core';
+import { connectRouter, routerMiddleware, ConnectedRouter } from 'connected-react-router';
+import { createBrowserHistory } from 'history';
 import initialStore from './store';
 
 
@@ -11,11 +13,23 @@ import * as serviceWorker from './serviceWorker';
 
 import './index.css';
 
-const store = init(initialStore);
+const history = createBrowserHistory();
+
+const store = init({
+  ...initialStore,
+  redux: {
+    reducers: {
+      router: connectRouter(history),
+    },
+    middlewares: [routerMiddleware(history)],
+  },
+});
 
 const Root = () => (
   <Provider store={store}>
-    <App />
+    <ConnectedRouter history={history}>
+      <App />
+    </ConnectedRouter>
   </Provider>
 );
 
